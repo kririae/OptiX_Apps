@@ -35,6 +35,7 @@
 #include "shader_common.h"
 #include "random_number_generators.h"
 
+#include <cub/util_device.cuh>
 
 __forceinline__ __device__ void alignVector(float3 const& axis, float3& w)
 {

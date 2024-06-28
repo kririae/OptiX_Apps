@@ -69,14 +69,14 @@ set(USE_OPTIX_IR FALSE)
 set(OPTIX_MODULE_EXTENSION ".ptx")
 set(OPTIX_PROGRAM_TARGET "--ptx")
 
-if (OptiX80_FOUND OR OptiX77_FOUND OR OptiX76_FOUND OR OptiX75_FOUND)
-  # Define USE_OPTIX_IR and change the target to OptiX IR if the combination of OptiX SDK and CUDA Toolkit versions supports this mode.
-  if ((${CUDAToolkit_VERSION_MAJOR} GREATER 11) OR ((${CUDAToolkit_VERSION_MAJOR} EQUAL 11) AND (${CUDAToolkit_VERSION_MINOR} GREATER_EQUAL 7)))
-    set(USE_OPTIX_IR TRUE)
-    set(OPTIX_MODULE_EXTENSION ".optixir")
-    set(OPTIX_PROGRAM_TARGET "--optix-ir")
-  endif()
-endif()
+#if (OptiX80_FOUND OR OptiX77_FOUND OR OptiX76_FOUND OR OptiX75_FOUND)
+#  # Define USE_OPTIX_IR and change the target to OptiX IR if the combination of OptiX SDK and CUDA Toolkit versions supports this mode.
+#  if ((${CUDAToolkit_VERSION_MAJOR} GREATER 11) OR ((${CUDAToolkit_VERSION_MAJOR} EQUAL 11) AND (${CUDAToolkit_VERSION_MINOR} GREATER_EQUAL 7)))
+#    set(USE_OPTIX_IR TRUE)
+#    set(OPTIX_MODULE_EXTENSION ".optixir")
+#    set(OPTIX_PROGRAM_TARGET "--optix-ir")
+#  endif()
+#endif()
 
 set( IMGUI
   imgui/imconfig.h
@@ -212,7 +212,7 @@ NVCUDA_COMPILE_MODULE(
   TARGET_PATH "${MODULE_TARGET_DIR}/rtigo3_core"
   EXTENSION "${OPTIX_MODULE_EXTENSION}"
   GENERATED_FILES PROGRAM_MODULES
-  NVCC_OPTIONS "${OPTIX_PROGRAM_TARGET}" "--machine=64" "--gpu-architecture=compute_50" "--use_fast_math" "--relocatable-device-code=true" "--generate-line-info" "-Wno-deprecated-gpu-targets" "--allow-unsupported-compiler" "-I${OPTIX_INCLUDE_DIR}" "-I${CMAKE_CURRENT_SOURCE_DIR}/shaders"
+  NVCC_OPTIONS "${OPTIX_PROGRAM_TARGET}" "--machine=64" "--gpu-architecture=compute_86" "--use_fast_math" "--relocatable-device-code=true" "--generate-line-info" "-Wno-deprecated-gpu-targets" "--allow-unsupported-compiler" "-I${OPTIX_INCLUDE_DIR}" "-I${CMAKE_CURRENT_SOURCE_DIR}/shaders"
 )
 
 # The native CUDA Kernels will be translated to *.ptx unconditionally.
@@ -222,7 +222,7 @@ NVCUDA_COMPILE_MODULE(
   TARGET_PATH "${MODULE_TARGET_DIR}/rtigo3_core"
   EXTENSION ".ptx"
   GENERATED_FILES KERNEL_MODULES
-  NVCC_OPTIONS "--ptx" "--machine=64" "--gpu-architecture=compute_50" "--use_fast_math" "--relocatable-device-code=true" "--generate-line-info" "-Wno-deprecated-gpu-targets" "--allow-unsupported-compiler" "-I${CMAKE_CURRENT_SOURCE_DIR}/shaders"
+  NVCC_OPTIONS "--ptx" "--machine=64" "--gpu-architecture=compute_86" "--use_fast_math" "--relocatable-device-code=true" "--generate-line-info" "-Wno-deprecated-gpu-targets" "--allow-unsupported-compiler" "-I${CMAKE_CURRENT_SOURCE_DIR}/shaders"
 )
 
 source_group( "imgui"           FILES ${IMGUI} )

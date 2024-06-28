@@ -35,6 +35,8 @@
 #include "shader_common.h"
 #include "random_number_generators.h"
 
+#include <cub/util_device.cuh>
+
 // This function evaluates a Fresnel dielectric function when the transmitting cosine ("cost")
 // is unknown and the incident index of refraction is assumed to be 1.0f.
 // \param et     The transmitted index of refraction.

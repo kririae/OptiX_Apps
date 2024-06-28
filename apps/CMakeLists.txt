@@ -78,5 +78,5 @@ endif()
 
 # A viewer for glTF 2.0 assets which implements a global illumination renderer handling the glTF PBR material model plus many extensions.
 # It does not support skinning or animation, yet, but renders pretty fast and has a GUI whhich allows to change material parameters.
-add_subdirectory( GLTF_renderer )
+# add_subdirectory( GLTF_renderer )
 
